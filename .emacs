@@ -13,4 +13,4 @@
   ;; If there is more than one, they won't work right.
  )
 
-
+(setq-default make-backup-files nil)
