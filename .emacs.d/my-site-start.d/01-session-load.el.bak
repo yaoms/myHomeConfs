@@ -1,0 +1,6 @@
+;;;; 会话功能加载
+(require 'session)
+(add-hook 'after-init-hook 'session-initialize) 
+(load "desktop")
+(desktop-load-default)
+(desktop-read)

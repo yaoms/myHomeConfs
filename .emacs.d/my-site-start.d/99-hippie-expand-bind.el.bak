@@ -1,0 +1,2 @@
+;;;; 绑定按键
+(global-set-key [(meta ?/)] 'hippie-expand)

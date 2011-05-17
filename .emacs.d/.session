@@ -1,0 +1,9 @@
+;;; Automatically generated on Fri Apr 22 14:51:46 2011
+;;; Invoked by yaoms@yaoms-dt-kkf using 23.1.1
+(setq-default session-file-alist '(("~/.emacs.d/my-site-start.d/00-load-path.el" 72 nil 1 nil nil 72 (overwrite-mode)) ("~/shapan/cpp/lesson1/vars.cpp" 126 108 1 nil nil 126 (overwrite-mode)) ("~/.emacs.d/my-site-start.d/99-auto-complete.el" 121 1 1 nil nil 121 (overwrite-mode)) ("~/.emacs.d/my-site-start.d/99-hippie-expand-bind.el" 54 nil 1 nil nil 53 (overwrite-mode)) ("~/.emacs" 118 nil 1 nil nil 116 (overwrite-mode))))
+(setq-default file-name-history '("~/.emacs.d/my-site-start.d/01-session-load.el" "~/.emacs.d/my-site-start.d/99-hippie-expand-bind.el" "" "~/.emacs.d/my-site-start.d/00-load-path.el" "~/shapan/cpp/lesson1/vars.cpp" "~/.emacs.d/my-site-start.d/99-auto-complete.el" "~/.emacs.d/lisp/" "/tmp/auto-complete-1.3.1/etc/install.el" "~/.emacs" "~/" "~/.emacs.d/"))
+(setq-default buffer-name-history '("00-load-path.el" "vars.cpp" "*GNU Emacs*" "*Messages*"))
+(setq-default command-history '((find-file "~/.emacs.d/my-site-start.d/01-session-load.el" t) (find-file "~/.emacs.d/my-site-start.d/99-hippie-expand-bind.el" t) (switch-to-buffer "00-load-path.el") (switch-to-buffer "vars.cpp") (find-file "" t) (find-file "~/.emacs.d/my-site-start.d/00-load-path.el" t) (find-file "~/shapan/cpp/lesson1/vars.cpp" t) (find-file "~/.emacs.d/my-site-start.d/99-auto-complete.el" t) (load-file "/tmp/auto-complete-1.3.1/etc/install.el") (load-file "~/.emacs.d/my-site-start.d/99-auto-complete.el") (hippie-expand nil) (compile "make -k " nil) (switch-to-buffer "*GNU Emacs*") (switch-to-buffer "*Messages*") (find-file "~/.emacs" t) (desktop-save "~/") (load-file "~/.emacs") (desktop-save "~/.emacs.d/")))
+(setq-default compile-history '("make -k "))
+(setq-default extended-command-history '("load-file" "hippie-expand" "compile" "desktop-save"))
+(setq-default yes-or-no-p-history '("yes" "y"))
