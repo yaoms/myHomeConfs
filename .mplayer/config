@@ -1,0 +1,16 @@
+vo = "x11"
+ao = "pulse,alsa"
+
+framedrop = yes
+
+subcp = utf8
+subfont-autoscale = 1
+subfont-text-scale = 6
+zoom = yes
+
+osdlevel = 3
+
+#fontconfig = no
+
+ass = yes
+ass-font-scale = 0
