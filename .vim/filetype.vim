@@ -1,4 +1,4 @@
 augroup filetypedetect
-au BufNewFile,BufRead *.uutxt       setf uutxt
-au BufNewFile,BufRead UuTxt*.txt    setf uutxt
+au BufNewFile,BufRead *.etxt        setf etxt
+au BufNewFile,BufRead UuTxt*        setf etxt
 augroup END

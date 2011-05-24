@@ -22,4 +22,4 @@ hi def link uutxtTitle          Title
 hi def link uutxtIndent         Conceal
 hi def link uutxtComment        Comment
 
-let b:current_syntax = "uutxt"
+let b:current_syntax = "etxt"
