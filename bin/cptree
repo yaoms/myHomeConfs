@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 DIR=$2
 FILE=$1
 NEW_DIR=`dirname $FILE`

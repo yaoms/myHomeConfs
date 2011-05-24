@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # translate selected words with google-translate
 # and show it with libnotify
 WORD=`/usr/bin/xsel -o`

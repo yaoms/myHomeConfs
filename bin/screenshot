@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/sh
 import -quality 98 ~/Downloads/screenshot-`date +%Y%m%d%H%M%S`.jpg

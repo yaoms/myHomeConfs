@@ -16,10 +16,10 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 " set autoindent
 " set smartindent             "自动缩进，粘贴时超长的行会被自动折行
 " set cindent                 "对C语言进行智能缩进
-" set expandtab                 "扩展制表符，可以用空格替代tab符
-" set shiftwidth=4              "自动缩进的宽度
-" set softtabstop=4             "软制表符宽度
-" set tabstop=4               "制表符宽度
+set expandtab                 "扩展制表符，可以用空格替代tab符
+set shiftwidth=4              "自动缩进的宽度
+set softtabstop=4             "软制表符宽度
+set tabstop=4                 "制表符宽度
 " set wrap                    "自动折行，使用nowrap取消自动折行
 
 " set fdm=indent                "启用代码折叠
