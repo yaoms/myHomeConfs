@@ -1,0 +1,2 @@
+#!/bin/sh
+feh -t -Sfilename -E128 -y128 -F $@

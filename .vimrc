@@ -3,7 +3,7 @@ filetype on
 syntax enable
 set autowrite                 "自动保存
 
-set cindent                   "C/Cxx 自动缩进
+" set cindent                   "C/Cxx 自动缩进
 
 set encoding=utf-8            "VI内部编码
 set langmenu=zh_CN.UTF-8      "菜单语言编码
