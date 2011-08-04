@@ -848,6 +848,7 @@ function FindProxyForURL(url, host) {
   if(/^[\w\-]+:\/+(?!\/)(?:[^\/]+\.)?gutteruncensored\.com/i.test(url)) return PROXY;
   if(/\.gzm\.tv/i.test(url)) return PROXY;
   if(/^[\w\-]+:\/+(?!\/)(?:[^\/]+\.)?gzone\-anime\.info/i.test(url)) return PROXY;
+  if(/www\.google\.com\.hk/i.test(url)) return PROXY;
   if(/mail\.google\.com/i.test(url)) return PROXY;
   if(/profiles\.google\.com/i.test(url)) return PROXY;
   if(/code\.google\.com\/p\/gappproxy/i.test(url)) return PROXY;
