@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/yaoms/work/devel/android_build/cyanogen_froyo/packages/apps/SmscFetcher/src/com/android/extension/component'
-let g:netrw_dirhist_2='/home/yaoms/work/devel/android_build/cyanogen_froyo/packages/apps/HelloJNI'
-let g:netrw_dirhist_3='/tmp/sandbox/Sample/BannerAdSample/libs'
-let g:netrw_dirhist_4='/home/yaoms/Downloads/宏伟交接文件/workspace/Standard_Server_Frame/WebRoot/WEB-INF/config/defaultServer'
-let g:netrw_dirhist_5='/home/yaoms/Downloads/宏伟交接文件/workspace/Standard_Server_Frame/src/com/lb/ss/frame'
-let g:netrw_dirhist_6='/home/yaoms/j2ee/workspace/Standard_Server_Frame/src'

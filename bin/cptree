@@ -4,4 +4,4 @@ FILE=$1
 NEW_DIR=`dirname $FILE`
 
 mkdir -pv $DIR/$NEW_DIR
-cp -v $FILE $DIR/$FILE
+rsync -avP $FILE $DIR/$NEW_DIR
