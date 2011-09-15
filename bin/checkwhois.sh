@@ -16,7 +16,7 @@ echo "检查结果:"
 for d in $POSTFIX
 do whois $DOMAIN.$d | grep 'No match' && FREE=1
     if [ $FREE -eq 1 ]
-    then echo "$DOMAIN.$d\t可用"
-    else echo "$DOMAIN.$d\t不可用"
+    then echo "$DOMAIN.$d   可用"
+    else echo "$DOMAIN.$d   不可用"
     fi
 done
