@@ -1,63 +1,96 @@
-colorscheme desert
-filetype on
-syntax enable
-set autowrite                 "自动保存
+" An example for a vimrc file.
+"
+" Maintainer:	Bram Moolenaar <Bram@vim.org>
+" Last change:	2008 Dec 17
+"
+" To use it, copy it to
+"     for Unix and OS/2:  ~/.vimrc
+"	      for Amiga:  s:.vimrc
+"  for MS-DOS and Win32:  $VIM\_vimrc
+"	    for OpenVMS:  sys$login:.vimrc
 
-" set cindent                   "C/Cxx 自动缩进
-
-set encoding=utf-8            "VI内部编码
-set langmenu=zh_CN.UTF-8      "菜单语言编码
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-" language message zh_CN.UTF-8  "消息语言编码
-set termencoding=utf-8        "终端编码
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-                              "自动检测编码顺序
-" set autoindent
-" set smartindent             "自动缩进，粘贴时超长的行会被自动折行
-" set cindent                 "对C语言进行智能缩进
-set expandtab                 "扩展制表符，可以用空格替代tab符
-set shiftwidth=4              "自动缩进的宽度
-set softtabstop=4             "软制表符宽度
-set tabstop=4                 "制表符宽度
-" set wrap                    "自动折行，使用nowrap取消自动折行
-
-" set fdm=indent                "启用代码折叠
-" set fdc=4                     "代码折叠宽度
-
-set lcs=tab:+-,trail:-        "TAB用 +--- 代替，行尾空格用 - 代替。
-set list                      "显示tab和行尾空格
-
-set hlsearch                  "搜索关键词高亮
-set incsearch                 "表示在你输入查找内容的同时，vim就开始对你输入的内容进行匹配，并显示匹配的位置
-
-" set mouse=a                   "在Normal,Visual,Command,help file模式中使用鼠标
-set nobackup                  "取消自动备份
-set nocompatible              "将使vim 以比默认的vi 兼容模式功能更强的方式运行
-set number                    "显示行号
-set ruler                     "显示标尺
-set showcmd                   "显示命令参数
-set showmode                  "显示VI编辑器模式
-set title
-
-set wildmenu                  "启动具有菜单项提示的命令行自动完成。
-set cpo-=<
-set wcm=<C-Z>
-
-" Only do this part when compiled with support for autocommands
-if has("autocmd")
-   " When editing a file, always jump to the last cursor position
-   autocmd BufReadPost *
-     \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-     \   exe "normal! g'\"" |
-     \ endif
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+  finish
 endif
 
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
 
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
 
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file
+endif
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set incsearch		" do incremental searching
 
-"pydiction 1.2 python auto complete
-filetype plugin on
-let g:pydiction_location = '~/.vim/tools/pydiction/complete-dict'
-"defalut g:pydiction_menu_height == 15
-"let g:pydiction_menu_height = 20
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  " Also don't do it when the mark is in the first line, that is the default
+  " position when opening a file.
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
