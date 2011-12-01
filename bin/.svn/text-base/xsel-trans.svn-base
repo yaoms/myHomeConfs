@@ -1,8 +1,0 @@
-#!/bin/bash
-# translate selected words with google-translate
-# and show it with libnotify
-WORD=`/usr/bin/xsel -o`
-TEXT=`translate.py zh """$WORD"""`
-DISPLAY=:0.0 notify-send -i /usr/share/pixmaps/chmsee-icon.png \
-	 -u normal -t 8000  来自谷歌翻译： """$WORD => $TEXT"""
-#echo $TEXT
