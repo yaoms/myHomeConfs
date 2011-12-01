@@ -1,0 +1,18 @@
+#!/bin/sh
+
+SVND="/usr/bin/svnserve -d -r /var/svn"
+
+case "$0" in
+    start)
+	$SVND
+	;;
+    stop)
+	pkill -f '/var/svn'
+	;;
+    *)
+	echo "USAGE: $0 {start|stop}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

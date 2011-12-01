@@ -1,0 +1,1 @@
+java -cp /home/yaoms/j2ee/workspace/douwan3.0/build/classes/:/home/yaoms/j2ee/workspace/douwan3.0/WebContent/WEB-INF/lib/javabase64-1.3.1.jar:/home/yaoms/j2ee/workspace/douwan3.0/WebContent/WEB-INF/lib/log4j-1.2.14.jar:/home/yaoms/j2ee/workspace/douwan3.0/WebContent/WEB-INF/lib/jdom.jar conch.yaoms.test.bot.Test

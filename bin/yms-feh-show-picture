@@ -1,9 +1,2 @@
 #!/bin/sh
-pics=$@
-
-if [ $# -eq 1 ]
-then	pics=`dirname "$1"`/*
-	pics=$1" "${pics}
-fi
-
-feh -F $pics
+feh -F "$1"

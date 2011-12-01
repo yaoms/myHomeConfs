@@ -1,0 +1,14 @@
+#!/bin/bash
+HOME_DIR=/home/yaoms
+DIR=$HOME_DIR/work/devel/workspace
+PROJECT_NAME=$1
+
+tar cvjf $HOME_DIR/Downloads/${PROJECT_NAME}_`now`.tar.bz2 -C $DIR \
+ --exclude=$PROJECT_NAME/bin \
+ --exclude=$PROJECT_NAME/src/android \
+ --exclude=$PROJECT_NAME/src/com/android \
+ --exclude=$PROJECT_NAME/gen/com/android \
+ --exclude=$PROJECT_NAME/.* \
+ --exclude=$PROJECT_NAME/gen \
+ --exclude=$PROJECT_NAME/default.properties \
+ $PROJECT_NAME

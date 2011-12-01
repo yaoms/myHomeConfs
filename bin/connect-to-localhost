@@ -1,0 +1,2 @@
+#!/bin/sh
+mysql -ufunbox -pfunbox20101104 test2

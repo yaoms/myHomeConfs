@@ -1,0 +1,9 @@
+[color]
+	ui = auto
+[user]
+	name = Yaoms
+	email = yms541@gmail.com
+[diff]
+    external = git_diff_wrapper
+[pager]
+    diff =

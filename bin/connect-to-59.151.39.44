@@ -1,0 +1,2 @@
+#!/bin/sh
+mysql -h59.151.39.44 -ufunbox -pfunbox20101104 -P8904 kkfun_funbox_kkr_report

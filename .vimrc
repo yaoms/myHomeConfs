@@ -99,3 +99,10 @@ endif
 
 set termencoding=utf-8        "终端编码
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
+if ! has("gui_running")  
+    set t_Co=256  
+endif  
+if &diff  
+    colors peaksea  
+endif 

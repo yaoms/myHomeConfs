@@ -1,0 +1,28 @@
+#!/bin/sh
+
+#  高闯：
+#  
+#     FUNBOX北京服务器（IP44）从今天开始正式移交给你们部门自行管理，账号如下，请谨慎管理服务器及其账号
+#  
+#  系统帐号：
+#  port:20089
+#  root:kkfun44!@#$%^&*()_+beijingROOT20100817
+#  king:kkfun44!@#$%^&*()_+beijingKING20100320
+#  funbox:44KKFUN(**)!!QSDFA#@$124ggFUNBOX
+#  
+#  数据库：
+#  port:  8904
+#  kkfun: 44DATABASE!!@@##VBC+_{:kkfun
+#  root:  44!!@@#root#VBC+_{:}{OL:"|DATABASE
+
+#  移交后，新root密码
+#  root:KKFUN44_!@@#)$#BeijingROOT20110601
+
+
+#  新root密码 2011-07-25
+#  root:KKFUN44_!^@*!$#BeiJingROOT20110725
+
+# 新 funbox 密码 2011年 08月 15日 星期一 09:48:24 CST
+# t4FUNBOX^&*#SSH%$^%$REMOTE$%LOGIN20110815
+
+ssh -p20089 funbox@59.151.39.44
