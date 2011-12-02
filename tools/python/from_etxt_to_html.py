@@ -38,14 +38,17 @@ for line in f:
     elif p.match(line):
         if chapterCount>-1:
             chapters[chapterCount]['wordcount'] = len(chapters[chapterCount]['content'].decode('utf-8'))
+	    wordCount += chapters[chapterCount]['wordcount']
         g = p.match(line)
         chapterCount += 1
-        wordCount += int(g.group(2))
         chapters += [{'title':g.group(1),'content':"",'wordcount':int(g.group(2))}]
     elif chapterCount>=0 and line.startswith('  '):
         chapters[chapterCount]['content'] += line.strip()
         chapters[chapterCount]['content'] += "\n"
-chapterCount += 1
+if chapterCount>-1:
+    chapters[chapterCount]['wordcount'] = len(chapters[chapterCount]['content'].decode('utf-8'))
+    wordCount += chapters[chapterCount]['wordcount']
+    chapterCount += 1
 
 f.close()
 
