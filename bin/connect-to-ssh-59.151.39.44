@@ -28,4 +28,4 @@
 # 新 funbox 密码 2011年 08月 15日 星期一 09:48:24 CST
 # t4FUNBOX^&*#SSH%$^%$REMOTE$%LOGIN20110815
 
-ssh -p20089 funbox@59.151.39.44
+ssh -p20089 funbox@funbox44
