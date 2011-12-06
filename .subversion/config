@@ -68,6 +68,7 @@ diff-cmd = /home/yaoms/bin/svndiff
 ### merging tool of choice. Subversion will pass 4 arguments to
 ### the specified command: base theirs mine merged
 # merge-tool-cmd = merge_command
+merge-tool-cmd = svn-merge-vim
 
 ### Section for configuring tunnel agents.
 [tunnels]
