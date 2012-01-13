@@ -4,6 +4,12 @@ import sys
 import os
 import datetime
 
+class Chapter:
+	"""图书章节"""
+	def __init__(self):
+		self.title   = ""
+		self.content = []
+
 class Book:
 	"""etxt 图书对象"""
 	def __init__(self):
@@ -105,12 +111,6 @@ p {text-indent:2em;}
 </html>""" % datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %T"))
 		
 		indexfile.close()
-
-class Chapter:
-	"""图书章节"""
-	def __init__(self):
-		self.title   = ""
-		self.content = []
 
 if __name__ == "__main__":
 	f = open(sys.argv[1], "r")
