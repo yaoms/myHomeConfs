@@ -1,7 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/home/yaoms/Downloads/宏伟交接文件/workspace2/Resource_Server/src/com/rs/kkfun'
 let g:netrw_dirhist_2='/home/yaoms/Downloads/宏伟交接文件/workspace2/Resource_Server/src/com/rs/kkfun/main_server'
 let g:netrw_dirhist_3='/home/yaoms/Downloads/宏伟交接文件/workspace2/Resource_Server/src/com/rs/kkfun/main_server/service'
 let g:netrw_dirhist_4='/home/yaoms/tools/python'
 let g:netrw_dirhist_5='/home/yaoms/.byobu'
+let g:netrw_dirhist_6='/home/yaoms/tools/node.js/node-v0.6.6'

@@ -1,14 +1,17 @@
 # coding: utf-8
 from optparse import OptionParser
 from utils.confirm_ask import confirm_ask
+from etxt.Book import Book, Chapter
 
 import re
 import os
 import sys
 import datetime
 
+version = "%prog 1.0"
 usage="\n\n  %prog -f eletxtbookname.etxt -d outputdir"
-parser = OptionParser(usage=usage, version="%prog 1.0")
+
+parser = OptionParser(usage=usage, version=version)
 parser.add_option("-f", "--file", dest="filename",
                       help="read etxt from FILENAME.")
 parser.add_option("-d", "--dir", dest="dirname",
@@ -19,48 +22,16 @@ if not options.filename or not options.dirname:
     parser.print_help()
     sys.exit(1)
 
-bookName = ''
-author = ''
-keyword = ''
-chapterCount = -1
-wordCount = 0
-chapters = []
-
 f = open(options.filename,'r')
-p = re.compile(r'(.+) 字数:(\d+)')
-for line in f:
-    if line.startswith('书名:'):
-        bookName = line.replace('书名:','').strip()
-    elif line.startswith('作者:'):
-        author = line.replace('作者:','').strip()
-    elif line.startswith('标签:'):
-        keyword = line.replace('标签:','').strip()
-    elif p.match(line):
-        if chapterCount>-1:
-            chapters[chapterCount]['wordcount'] = len(chapters[chapterCount]['content'].decode('utf-8'))
-	    wordCount += chapters[chapterCount]['wordcount']
-        g = p.match(line)
-        chapterCount += 1
-        chapters += [{'title':g.group(1),'content':"",'wordcount':int(g.group(2))}]
-    elif chapterCount>=0 and line.startswith('  '):
-        chapters[chapterCount]['content'] += line.strip()
-        chapters[chapterCount]['content'] += "\n"
-if chapterCount>-1:
-    chapters[chapterCount]['wordcount'] = len(chapters[chapterCount]['content'].decode('utf-8'))
-    wordCount += chapters[chapterCount]['wordcount']
-    chapterCount += 1
+lines = f.readlines()
 
 f.close()
 
+book = Book()
+book.load(lines)
+
 #提问一些简单的信息，例如书的分类
-print "显示统计信息"
-print "------------------------------"
-print "- 书名：\t%s" % bookName
-print "- 作者：\t%s" % author
-print "- 章节数：\t%d" % chapterCount
-print "- 字数：\t%d" % wordCount
-print "------------------------------"
-print
+book.info()
 #for chapter in chapters[:3]:
 #    print chapter['title']
 #    print "-----------------------"
@@ -88,26 +59,28 @@ indexfile.writelines("""<html>
 <h1>《%s》</h1>
 <p>作者：%s</p>
 <ol>
-""" % (bookName, bookName, author))
+""" % (book.name, book.name, book.author))
 
 index=1
 pre=0
 nxt=index+1
 
-for chapter in chapters:
-	indexfile.writelines("""  <li><a href="%d.html">%s</a></li>\n""" % (index, chapter['title']))
+for chapter in book.chapters:
+	indexfile.writelines("""  <li><a href="%d.html">%s</a></li>\n""" % (index, chapter.title))
 	this_chapter_file=open("%s/%d.html" % (options.dirname, index), 'w')
 	this_chapter_file.writelines("""<html>
 <head>
 <title>%s</title>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<style>
+p {text-indent:2em;}
+</style>
 </head>
 <body>
 <h1>%s</h1>
-""" % (chapter['title'], chapter['title']))
-	ps = chapter['content'].split('\n')
+""" % (chapter.title, chapter.title))
 
-	for p in ps:
+	for p in chapter.content:
 		this_chapter_file.writelines("""<p>%s</p>\n""" % p)
 	
 	this_chapter_file.writelines("<hr/>\n")
@@ -115,7 +88,7 @@ for chapter in chapters:
 	if pre >= 1:
 		this_chapter_file.writelines("""<a href="%d.html" title="prev">上一章</a>\n""" % pre)
 	this_chapter_file.writelines("""<a href="index.html" title="home">返回目录</a>\n""")
-	if nxt <= len(chapters):
+	if nxt <= len(book.chapters):
 		this_chapter_file.writelines("""<a href="%d.html" title="next">下一章</a>\n""" % nxt)
 	this_chapter_file.writelines("</p>\n")
 
