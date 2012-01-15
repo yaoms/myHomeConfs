@@ -24,12 +24,8 @@ if not options.filename or not options.dirname:
 # options.filename
 # options.dirname
 
-f = open(options.filename,'r')
-lines = f.readlines()
-f.close()
-
 book = Book()
-book.load(lines)
+book.load(options.filename)
 book.info()
 print("将导出到 %s 目录" % options.dirname)
 print("")

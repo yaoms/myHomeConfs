@@ -17,7 +17,10 @@ class Book:
 		self.author   = ""
 		self.chapters = []
 
-	def load(self, lines):
+	def load(self, filename):
+		f = open(filename, 'r')
+		lines = f.readlines()
+		f.close()
 		currentChapter = 0;
 		for line in lines:
 			if line.startswith("书名:"):
@@ -45,7 +48,6 @@ class Book:
 			print("=================")
 			for c in self.chapters:
 				print(" = %s" % c.name)
-				print(id(c.content))
 			print("=================")
 	
 	def dumpTo(self, dirname):
@@ -113,8 +115,6 @@ p {text-indent:2em;}
 		indexfile.close()
 
 if __name__ == "__main__":
-	f = open(sys.argv[1], "r")
-	lines = f.readlines()
 	book = Book()
-	book.load(lines)
+	book.load("/home/yaoms/相公多多追着跑.etxt")
 	book.info()
