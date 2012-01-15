@@ -7,7 +7,7 @@ import datetime
 class Chapter:
 	"""图书章节"""
 	def __init__(self):
-		self.title   = ""
+		self.name   = ""
 		self.content = []
 
 class Book:
@@ -28,7 +28,7 @@ class Book:
 				if currentChapter:
 					self.chapters.append(currentChapter)
 				currentChapter = Chapter()
-				currentChapter.title = line.strip()[:line.index(" 字数:")]
+				currentChapter.name = line.strip()[:line.index(" 字数:")]
 			if line.startswith("  "):
 				if currentChapter:
 					currentChapter.content.append(line.strip())
@@ -44,7 +44,7 @@ class Book:
 		if __name__ == "__main__":
 			print("=================")
 			for c in self.chapters:
-				print(" = %s" % c.title)
+				print(" = %s" % c.name)
 				print(id(c.content))
 			print("=================")
 	
@@ -72,7 +72,7 @@ class Book:
 		nxt=index+1
 		
 		for chapter in self.chapters:
-			indexfile.writelines("""  <li><a href="%d.html">%s</a></li>\n""" % (index, chapter.title))
+			indexfile.writelines("""  <li><a href="%d.html">%s</a></li>\n""" % (index, chapter.name))
 			this_chapter_file=open("%s/%d.html" % (dirname, index), 'w')
 			this_chapter_file.writelines("""<html>
 <head>
@@ -84,7 +84,7 @@ p {text-indent:2em;}
 </head>
 <body>
 <h1>%s</h1>
-""" % (chapter.title, chapter.title))
+""" % (chapter.name, chapter.name))
 		
 			for p in chapter.content:
 				this_chapter_file.writelines("""<p>%s</p>\n""" % p)
