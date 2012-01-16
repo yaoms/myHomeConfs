@@ -1,6 +1,6 @@
 # coding: utf-8
 from utils.confirm_ask import confirm_ask
-from etxt.Book import Book, Chapter
+from etxt.Book import Book
 
 from optparse import OptionParser
 import sys
