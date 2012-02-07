@@ -4,6 +4,8 @@
 	name = Yaoms
 	email = yms541@gmail.com
 [diff]
-    external = git_diff_wrapper
+	external = git_diff_wrapper
 [pager]
-    diff =
+	diff =
+[merge]
+	tool = vimdiff
