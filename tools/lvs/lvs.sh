@@ -4,6 +4,7 @@
 vip="10.0.5.14"
 mask="255.255.255.255"
 vdev="eth0:0"
+
 port="80"
 
 # 真实服务器节点地址表，多个ip使用空格间隔
@@ -12,6 +13,7 @@ rs_ips="10.0.5.12 10.0.5.13"
 ifconfig $vdev $vip broadcast $vip netmask $mask
 #route add -host $vip dev $vdev
 ipvsadm -C
+
 ipvsadm -A -t $vip:$port -s rr
 
 for rip in $rs_ips

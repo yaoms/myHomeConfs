@@ -20,16 +20,21 @@ class Book:
 		f.close()
 		currentChapter = 0;
 		for line in lines:
-			if line.startswith("书名:"):
-				self.name = line.strip()[len("书名:"):]
-			if line.startswith("作者:"):
-				self.author = line.strip()[len("作者:"):]
-			if line.count(" 字数:"):
+			if line.startswith("<"):
+				self.name = line[1:].strip()
+				continue
+			if line.startswith("@"):
+				self.author = line[1:].strip()
+				continue
+			if line.startswith("#"):
 				if currentChapter:
 					self.chapters.append(currentChapter)
 				currentChapter = Chapter()
-				currentChapter.name = line.strip()[:line.index(" 字数:")]
-			if line.startswith("  "):
+				currentChapter.name = line[1:].strip()
+				continue
+			if line.startswith("!"):
+				continue
+			if len(line.strip()):
 				if currentChapter:
 					currentChapter.paragraphs.append(line.strip())
 		if currentChapter:
