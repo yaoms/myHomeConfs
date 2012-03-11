@@ -1,4 +1,6 @@
 #!/bin/sh
+# graphicsmagick
+# GEO=502x670 DIR=502x670 ~/myHomeConfs/bin/compress_photos.sh  *.JPG
 
 die() {
 	echo $@
