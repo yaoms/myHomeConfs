@@ -36,6 +36,6 @@ do
 	new_img=${DIR}/${img}
 	echo -n "Start converting $img ..."
 	#gm convert -quality 95 -resize ${GEO}^ -gravity Center -crop ${GEO}+0+0  $img $new_img
-	gm convert -resize ${GEO}^ -gravity Center -crop ${GEO}+0+0  $img $new_img
+	`gm convert -quality 99 -resize ${GEO}^ -gravity Center -crop ${GEO}+0+0  $img $new_img`
 	echo "...done" ;
 done
