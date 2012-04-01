@@ -105,5 +105,5 @@ if ! has("gui_running")
 endif  
 
 " if &diff  
-colors peaksea  
+" colors peaksea  
 " endif 
