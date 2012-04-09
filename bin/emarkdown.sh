@@ -15,17 +15,12 @@ die() {
 [ ! -z $HHTM ] && [ -f $HHTM ] || die
 [ ! -z $FHTM ] && [ -f $FHTM ] || die
 [ ! -z $1 ] && [ -f $1 ] || die
-[ ! -z $HTM ] || die
 
-DIR=`dirname $HTM`
-
-[ -d $DIR ] || die
-
-cat $HHTM > $HTM
-markdown $1 | perl -pe '$i=1 if $i==0;s/(<h\d>\d)/<a name="a_$i"\/>\1/,$i++ if m/<h\d>\d/' | tee $TMP | perl -ne 'if (m/<a name/) {s/<a name="([^"]+)"\/><h\d>(.+)<\/h\d>$/<p><a href="#\1">\2<\/a><\/p>/; print}' >> $HTM
-echo "<br />" >> $HTM
-echo "<hr />" >> $HTM
-echo "<br />" >> $HTM
-cat $TMP >> $HTM
-cat $FHTM >> $HTM
+cat $HHTM
+markdown $1 | perl -pe '$i=1 if $i==0;s/(<h\d>\d)/<a name="a_$i"\/>\1/,$i++ if m/<h\d>\d/' | tee $TMP | perl -ne 'if (m/<a name/) {s/<a name="([^"]+)"\/><h\d>(.+)<\/h\d>$/<a href="#\1">\2<\/a><br \/>/; print}'
+echo "<br />"
+echo "<hr />"
+echo "<br />"
+cat $TMP
+cat $FHTM
 
