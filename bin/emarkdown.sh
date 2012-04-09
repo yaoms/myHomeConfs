@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# require ENV TMP
+TMP=/tmp/tmp.html
+# require ENV HHTM
+# require ENV FHTM
+
+die() {
+	echo USAGE: HHTM=HHTM FHTM=FHTM `basename $0` xxx.md
+	echo HHTM	头部文件
+	echo FHTM	尾部文件
+	exit 1
+}
+
+[ ! -z $HHTM ] && [ -f $HHTM ] || die
+[ ! -z $FHTM ] && [ -f $FHTM ] || die
+[ ! -z $1 ] && [ -f $1 ] || die
+[ ! -z $HTM ] || die
+
+DIR=`dirname $HTM`
+
+[ -d $DIR ] || die
+
+cat $HHTM > $HTM
+markdown $1 | perl -pe '$i=1 if $i==0;s/(<h\d>\d)/<a name="a_$i"\/>\1/,$i++ if m/<h\d>\d/' | tee $TMP | perl -ne 'if (m/<a name/) {s/<a name="([^"]+)"\/><h\d>(.+)<\/h\d>$/<p><a href="#\1">\2<\/a><\/p>/; print}' >> $HTM
+echo "<br />" >> $HTM
+echo "<hr />" >> $HTM
+echo "<br />" >> $HTM
+cat $TMP >> $HTM
+cat $FHTM >> $HTM
+
