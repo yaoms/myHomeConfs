@@ -12,8 +12,6 @@ function FindProxyForURL(url, host) {
   if(/bloger\.com/i.test(url)) return PROXY; // Google Bloger
   if(/youtube\.com/i.test(url)) return PROXY; // Youtube (Google Video)
   if(/ytimg\.com/i.test(url)) return PROXY; // Youtube 的图片资源服务器
-  //depositfiles.com
-  //s.ytimg.com
   if(/wikipedia\.org/i.test(url)) return PROXY; // 维基百科
 
   //if(/ip138\.com/i.test(url)) return PROXY;
