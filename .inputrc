@@ -3,5 +3,5 @@
 # 搜索命令历史
 "\e[A": history-search-backward
 "\e[B": history-search-forward
-"\e\C-x": history-search-backward
-"\e\C-y": history-search-forward
+"\C-p": history-search-backward
+"\C-n": history-search-forward
