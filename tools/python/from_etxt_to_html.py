@@ -26,7 +26,7 @@ if not options.filename or not options.dirname:
 
 book = Book()
 book.load(options.filename)
-book.info()
+print book.info()
 print("将导出到 %s 目录" % options.dirname)
 print("")
 if not confirm_ask("是否确认继续？"):

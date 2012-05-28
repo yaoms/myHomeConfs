@@ -24,3 +24,4 @@ echo "<br />"
 cat $TMP
 cat $FHTM
 
+rm $TMP
