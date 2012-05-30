@@ -107,3 +107,10 @@ endif
 " if &diff  
 " colors peaksea  
 " endif 
+
+" 使用space代替tab.
+set expandtab
+" 四个空格。
+set tabstop=4
+" 自动缩进的宽度。
+set shiftwidth=4

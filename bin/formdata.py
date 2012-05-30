@@ -1,5 +1,5 @@
 # coding utf8
-import httplib, mimetypes, mimetools, urllib2, cookielib
+import httplib, mimetypes, mimetools, urllib2, cookielib, re
 
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
@@ -29,15 +29,15 @@ def encode_multipart_formdata(fields, files):
     L = []
     for (key, value) in fields:
         L.append('--' + BOUNDARY)
-	L.append('Content-Disposition: form-data; name="%s"' % key)
-	L.append('')
-	L.append(value)
+        L.append('Content-Disposition: form-data; name="%s"' % key)
+        L.append('')
+        L.append(value)
     for (key, filename, value) in files:
         L.append('--' + BOUNDARY)
-	L.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (key, filename))
-	L.append('Content-Type: %s' % get_content_type(filename))
-	L.append('')
-	L.append(value)
+        L.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (key, filename))
+        L.append('Content-Type: %s' % get_content_type(filename))
+        L.append('')
+        L.append(value)
     L.append('--' + BOUNDARY + '--')
     L.append('')
     body = CRLF.join(L)
@@ -45,22 +45,17 @@ def encode_multipart_formdata(fields, files):
     return content_type, body
 
 def get_content_type(filename):
-	return mimetypes.guess_type(filename)[0] or 'application/octet-stream'
+    return mimetypes.guess_type(filename)[0] or 'application/octet-stream'
+
+def find_group(regex, text):
+    g=re.findall(regex, text)
+    if g:
+        return g[0]
+    return None
+
 
 
 if __name__ == '__main__':
-	import sys, re
-	rsp = post_multipart("paste.ubuntu.org.cn", "/", (('poster', 'yaoms'),('parent_pid', ''), ('paste', 'send'), ('class', 'bash'), ('code2', 'test')), (('screenshot', sys.argv[1], open(sys.argv[1], 'rb').read()),))
-	#rsp = 'sdsdfsd\nasdsad\nsdsdf<a > asd<a href="/i1245">'
-	lines=rsp.split("\n")
-	for line in lines:
-		g=re.match(r'''.*href=['"]/(i\d+).*''', line)
-		if g:
-			print "http://paste.ubuntu.org.cn/%s" % g.group(1)
-			break
-	#(content_type, body) = encode_multipart_formdata((('poster', 'yaoms'),('parent_pid', ''), ('paste', 'send'), ('class', 'bash'), ('code2', 'test')), (('screenshot', sys.argv[1], open(sys.argv[1], 'rb').read()),))
-
-	#print content_type
-	#print ""
-	#print body
-
+    import sys
+    rsp = post_multipart("paste.ubuntu.org.cn", "/", (('poster', 'yaoms'),('parent_pid', ''), ('paste', 'send'), ('class', 'bash'), ('code2', 'test')), (('screenshot', sys.argv[1], open(sys.argv[1], 'rb').read()),))
+    print "http://paste.ubuntu.org.cn/%s" % find_group(r'''href=['"]/(i\d+)''', rsp)

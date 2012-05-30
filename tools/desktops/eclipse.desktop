@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=eclipse jee
+Comment=eclipse IDE
+Exec=/home/yaoms/j2ee/eclipse/eclipse
+Icon=/home/yaoms/j2ee/eclipse/icon.xpm
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Application;Development;
