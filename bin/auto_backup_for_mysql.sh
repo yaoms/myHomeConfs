@@ -26,7 +26,7 @@ DB_PORT=3306
 
 # 数据库备份用户和密码
 DB_USER=root
-DB_PASS=41102113
+DB_PASS=password
 
 # 数据库备份工具 mysqldump 的绝对路径
 DB_DUMPER=/usr/bin/mysqldump
