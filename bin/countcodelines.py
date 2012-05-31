@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # coding:utf8
+# 作者：yaoms 2012-05-31
+# 统计 java 代码行数，不计算注释和空行
 
 import os
 

@@ -1,2 +1,0 @@
-#!/bin/sh
-mysql -h59.151.39.44 -uroot -p'44!!@@#root#VBC+_{:}{OL:"|DATABASE' -P8904 mysql
