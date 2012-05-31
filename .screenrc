@@ -1,0 +1,5 @@
+# ~/.screenrc
+# http://blog.seety.org/everydaywork/2007/4/25/669/
+
+caption always "%{= wk} %{= KY} [%n]%t @ %H %{-} %= %{= KR} %l %{-} | %{= KG} %Y-%m-%d %{-} "
+hardstatus alwayslastline " %-Lw%{= Bw}%n%f %t%{-}%+Lw %=| %0c:%s "
