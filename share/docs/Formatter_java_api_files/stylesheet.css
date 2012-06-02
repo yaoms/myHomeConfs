@@ -1,0 +1,32 @@
+/* Javadoc 样式表 */
+
+/* 在此处定义颜色、字体和其他样式属性以覆盖默认值 */
+
+/* 页面背景颜色 */
+body { background-color: #FFFFFF; color:#444444}
+
+/* 标题 */
+h1 { font-size: 145% }
+
+/* 表格颜色 */
+.TableHeadingColor     { background: #F4CB82 ; color:#444444} /* 深紫色 */
+.TableSubHeadingColor  { background: #F6EBD6; color:#444444} /* 淡紫色 */
+.TableRowColor         { background: #FFFFFF; color:#444444} /* 白色 */
+
+/* 左侧的框架列表中使用的字体 */
+.FrameTitleFont   { font-size: 100%; font-family: Helvetica, Arial, sans-serif; color:#444444}
+.FrameHeadingFont { font-size:  90%; font-family: Helvetica, Arial, sans-serif; color:#444444}
+.FrameItemFont    { font-size:  90%; font-family: Helvetica, Arial, sans-serif; color:#444444}
+
+/* 导航栏字体和颜色 */
+.NavBarCell1    { background-color:#F4CB82; color:#444444} /* 淡紫色 */
+.NavBarCell1Rev { background-color:#F6EBD6 ; color:#FFFFFF} /* 深蓝色 */
+.NavBarFont1    { font-family: Arial, Helvetica, sans-serif; color:#444444;color:#444444;}
+.NavBarFont1Rev { font-family: Arial, Helvetica, sans-serif; color:#FFFFFF;color:#FFFFFF;}
+
+.NavBarCell2    {font-family: Arial, Helvetica, sans-serif; background-color:#FFFFFF; color:#444444}
+.NavBarCell3    { font-family: Arial, Helvetica, sans-serif; background-color:#FFFFFF; color:#444444}
+
+a:link { font-size: 14px; color: #CC0033; text-decoration: none;  }
+a:visited { font-size: 14px; color:#CC0033; text-decoration: none;  }
+a:hover { font-size: 14px; color: #ffffff; text-decoration: none; background-color:#CC0033 }

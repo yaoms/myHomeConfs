@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+<div class="widget HTML" id="HTML1">
+<h2 class="title">QRCode生成器 - qrcode generator</h2>
+<div class="widget-content">
+<div>
+<h2>纯文本</h2>
+<script type="text/javascript">
+function Text() {
+var code = document.getElementById("plaintext").value;
+// chld=X|1 X 的取值及含义 L 低抗损 M 中等抗损 Q 较好抗损 H 高抗损
+document.getElementById("plaintextimg").src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=" + code + "&chld=M|1&choe=UTF-8";
+document.getElementById("plaintextcode").innerHTML=code;
+}
+</script>
+<table>
+<tbody><tr><td>
+<table>
+<tbody><tr><td><label for="plaintext">文本：</label></td><td><textarea id="plaintext" name="plaintext"></textarea></td></tr>
+<tr><td> </td><td><input type="button" onclick="Text();" value="    立即生成！   "/></td></tr>
+</tbody></table>
+</td><td>
+<img id="plaintextimg" src="http://chart.apis.google.com/chart?chs=150x150&amp;cht=qr&amp;chl=MECARD:N:姚明顺;TITLE:服务端开发部 Android开发工程师;EMAIL:mingshun@kkfun.com;TEL:13798598016;ORG:汇友数码（深圳）有限公司 HuiYou Digital (ShenZhen) CO.,Ltd;ADR:深圳市福田区车公庙泰然六路雪松大厦B座13楼;;&amp;chld=M|1&amp;choe=UTF-8"/><br/>
+<span id="plaintextcode">MECARD:N:姚明顺;TITLE:服务端开发部 Android开发工程师;EMAIL:mingshun@kkfun.com;TEL:13798598016;ORG:汇友数码（深圳）有限公司 HuiYou Digital (ShenZhen) CO.,Ltd;ADR:深圳市福田区车公庙泰然六路雪松大厦B座13楼;;</span>
+</td></tr>
+</tbody></table>
+</div>
+<div>
+<h2>代码参考</h2>
+<p>拨号，电话: <i>TEL:10086</i></p>
+<p>发短信: <i>SMSTO:10086:CX</i></p>
+<p>发邮件：<i>MAILTO:yourname@domain.com</i></p>
+<p>联系人：<i>MECARD:N:姓名;ORG:公司;TITLE:头衔;TEL:电话;EMAIL:电邮;URL:网址;NOTE:备注;;</i></p>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+</body>
+</html>
