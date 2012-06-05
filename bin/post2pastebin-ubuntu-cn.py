@@ -77,7 +77,7 @@ else:
 
 # 初始化表单域
 fields = [
-            ('poster', 'yaoms'),
+            ('poster', 'name'),
             ('parent_pid', ''),
             ('paste', 'send'),
             ('class', filetype),
