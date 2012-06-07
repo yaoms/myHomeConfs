@@ -7,7 +7,7 @@ import formdata
 
 # 配置脚本版本，用法说明，命令行选项等信息
 version="%prog 1.0"
-usage="usage: %prog [options] FILENAME\n\n\t-- read from stdin if FILENAME is -."
+usage="usage: %prog [options] [FILENAME]\n\n\t-- read from stdin if FILENAME is -."
 filetypes = [
         "actionscript", "actionscript-french", "ada", "apache", "applescript", "asm", "asp", "autoit", "bash",
         "blitzbasic", "c", "c_mac", "caddcl", "cadlisp", "cfdg", "cpp", "csharp", "css", "d", "delphi", "diff",
