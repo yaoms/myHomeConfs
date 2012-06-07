@@ -57,19 +57,20 @@ if len(args):
         parser.print_help()
         sys.exit(2)
 else:
-    print >> sys.stderr, "file not provided"
-    parser.print_help()
-    sys.exit(2)
+    filename=None
 
 
 # 处理默认值
 if filetype=='bash':
     print >> sys.stderr, "use default filetype:", filetype
-if filename=="-":
-    print >> sys.stderr, "use stdin as file input."
-    filecontent = sys.stdin.read()
+if filename:
+    if filename=="-":
+        print >> sys.stderr, "use stdin as file input."
+        filecontent = sys.stdin.read()
+    else:
+        filecontent = open(filename, 'r').read()
 else:
-    filecontent = open(filename, 'r').read()
+    filecontent=""
 if screenshot:
     files=[('screenshot', screenshot, open(screenshot, 'rb').read()),]
 else:
