@@ -85,6 +85,10 @@ fields = [
             ('code2', filecontent)
          ]
 # 提交表单
-rsp = formdata.post_multipart("paste.ubuntu.org.cn", "/", fields, files)
-# 提取关注的内容
-print "http://paste.ubuntu.org.cn/%s" % formdata.find_group(r'''href=['"]/d(\d+)''', rsp)
+if len(files) or len(filecontent):
+    rsp = formdata.post_multipart("paste.ubuntu.org.cn", "/", fields, files)
+    # 提取关注的内容
+    print "http://paste.ubuntu.org.cn/%s" % formdata.find_group(r'''href=['"]/d(\d+)''', rsp)
+else:
+    print >> sys.stderr, "nothing will be sent."
+    parser.print_help()
