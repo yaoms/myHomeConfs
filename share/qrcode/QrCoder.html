@@ -15,7 +15,7 @@
 function Text() {
 var code = document.getElementById("plaintext").value;
 // chld=X|1 X 的取值及含义 L 低抗损 M 中等抗损 Q 较好抗损 H 高抗损
-document.getElementById("plaintextimg").src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=" + code + "&chld=M|1&choe=UTF-8";
+document.getElementById("plaintextimg").src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=" + encodeURIComponent(code) + "&chld=M|1&choe=UTF-8";
 document.getElementById("plaintextcode").innerHTML=code;
 }
 </script>
