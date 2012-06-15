@@ -34,7 +34,7 @@ class DreamCubeTop:
         conn = MySQLdb.connect(host=host, db=db, charset=charset, user=user, passwd=passwd)
         cursor = conn.cursor() # 获取数据库游标
     
-        sql = "select user_id, nickname, cube_score, isrobot from dw_user order by cube_score desc limit %s,%s" % (index, count)
+        sql = "select u.cube_score, u.user_id, u.nickname, u.isrobot, u.password, u.beans, u.is_online, l.city from dw_user u left join dw_location l on l.loc_id=u.loc_id order by u.cube_score desc limit %s,%s" % (index, count)
         output = []
         output.append("execute sql: " + sql)
         count = cursor.execute(sql)
@@ -44,15 +44,18 @@ class DreamCubeTop:
             output.append(s)
             s="<table width='100%' border='1'>"
             output.append(s)
-            s="<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>" % ("id", "userId", "Value", "nickname")
+            s="<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>" % ("id", "cube_score", "user_id", "nickname", "beans", "online", "city", "keep online", "json")
             output.append(s)
             i = index
             for item in cursor:
+                (cube_score, user_id, nickname, isrobot, password, beans, is_online, city) = (item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7])
                 i+=1
+                ko = "%s %s" % (user_id, password)
+                json = '{"uid":"%s", "pwd":"%s"},' % (user_id, password)
                 if item[3]==2:
-                    output.append("<tr bgcolor='#cec'><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (i, item[0], item[2], item[1]))
+                    output.append("<tr bgcolor='#cec'><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (i, cube_score, user_id, nickname, beans, (is_online==1 and "在线" or '离线'), city, ko, json))
                 else:
-                    output.append("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (i, item[0], item[2], item[1]))
+                    output.append("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (i, cube_score, user_id, nickname, beans, (is_online==1 and "在线" or '离线'), city, "", ""))
             output.append("</table>")
 
         # 关闭数据库连接

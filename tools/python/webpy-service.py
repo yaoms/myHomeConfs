@@ -33,8 +33,13 @@ urls = (
 		'/robots/count(\d+)/index(\d+)', "Robots",
 		'/robots/count(\d+)/index(\d+)/', "Robots",
 
-		'/', "index"
+		'/', "index",
+        '/(.+(?:jpg|jpeg|png|gif|css|js|ico))', 'static'
 	)
+
+class static:
+    def GET(self, path):
+        return web.redirect("/static/"+path)
 
 class index:
     """索引"""
