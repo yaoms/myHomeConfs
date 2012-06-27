@@ -19,7 +19,7 @@ class Robots:
         count=int(count)
         return self.main(count, index)
 
-    def main(self, count=10, index=0):
+    def main(self, count=20, index=0):
         # 配置数据库参数
         host='dw-mysql-remote'
         db='douwan3android'
@@ -34,7 +34,7 @@ class Robots:
         cursor = conn.cursor() # 获取数据库游标
     
         output = []
-        sql = "select username, user_id, password, nickname, beans from dw_user where isrobot=2 limit %s,%s" % (index, count)
+        sql = "select u.user_id, u.password, u.nickname, u.beans, u.cube_score, u.is_online, u.ip, u.lltime, l.city, dt.dream_value from (dw_user u left join dw_location l on u.loc_id=l.loc_id) left join dw_dream_tree dt on dt.user_id=u.user_id where u.isrobot=2 limit %s,%s" % (index, count)
         output.append("execute sql: " + sql)
         count = cursor.execute(sql)
         if count:
@@ -43,12 +43,19 @@ class Robots:
             output.append(s)
             s="<table width='100%' border='1'>"
             output.append(s)
-            s="<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>" % ("id", "name", "keep online", "json", "nickname", "beans")
+            s="<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>" % ("id", "keep online", "json", "beans", "cube score", "dream value", "ip", "city", "online", "lastonlinetime")
             output.append(s)
             i = index
             for item in cursor:
                 i+=1
-                output.append('<tr><td>%s</td><td>%s</td><td>%s %s</td><td>{"uid":"%s", "pwd":"%s"}</td><td>%s</td><td>%s</td></tr>' % (i, item[0], item[1], item[2], item[1], item[2], item[3], item[4]))
+                (user_id, password, nickname, beans, cube_score, is_online, ip, lltime, city, dream_value) = item
+                keep_online="%s %s" % (user_id, password)
+                json='{"nick":"%s", "uid":"%s", "pwd":"%s"},' % (nickname, user_id, password)
+                if is_online:
+                    online='<span style="background:#e99;">在线</span>'
+                else:
+                    online="离线"
+                output.append('<tr style="background:#cec;"><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (i, keep_online, json, beans, cube_score, dream_value, ip, city, online, getHumanTime(lltime)))
             output.append("</table>")
     
         # 关闭数据库连接
@@ -58,6 +65,20 @@ class Robots:
         output.append("<p><a href='/'>BACK</a></p>")
 
         return "\n".join(output)
+
+def getHumanTime(timestamp):
+    import time
+    seces = time.time()-timestamp/1000
+    if seces < 0:
+        seces = 0
+    if seces < 3600:
+        return "<span style='background:#aea'>%s分钟</span>" % int(seces/60)
+    elif seces >= 3600 and seces < 86400:
+        return "<span style='background:yellow'>%s小时</span>" % int(seces/3600)
+    elif seces >= 86400 and seces < 2592000:
+        return "<span style='background:orange'>%s天</span>" % int(seces/86400)
+    else:
+        return "<span style='background:red'>一月之前</span>"
 
 if __name__ == '__main__':
     m=Robots()

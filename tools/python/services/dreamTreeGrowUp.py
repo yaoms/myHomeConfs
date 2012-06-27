@@ -9,8 +9,11 @@ import MySQLdb
 import time
 import urllib2
 import random
+import sys
 
-def main():
+def main(ids):
+    if not len(ids):
+        return None
     # 配置数据库参数
     host='dw-mysql-remote'
     db='douwan3android'
@@ -19,24 +22,31 @@ def main():
     passwd='dw123456'
     #user='root'
     #passwd=''
-    dw_userId=26982
-    dw_growupvalue=random.randint(1,3)
+
 
     # 建立数据库连接
     conn = MySQLdb.connect(host=host, db=db, charset=charset, user=user, passwd=passwd)
     cursor = conn.cursor() # 获取数据库游标
-    sql = "update dw_dream_tree set dream_value = dream_value + %s where user_id = %s"
-    values = (dw_growupvalue, dw_userId)
-    print "execute sql:", sql % values
-    count = cursor.execute(sql, values)
+
+    count = 0
+    for i in ids:
+        dw_user_id = int(i)
+        dw_growupvalue=random.randint(1,3)
+        sql = "update dw_dream_tree set dream_value = dream_value + %s where user_id = %s"
+        values = (dw_growupvalue, dw_user_id)
+        print "execute sql:", sql % values
+        count += cursor.execute(sql, values)
+
     if count:
         conn.commit()
-    else:
-        print "userId: %s not found." % dw_userId
 
     # 关闭数据库连接
     cursor.close()
     conn.close()
 
 if __name__ == '__main__':
-    main()
+    argv = sys.argv[1:]
+    if len(argv):
+        main(argv)
+    else:
+        main()

@@ -13,13 +13,13 @@ sys.setdefaultencoding('UTF-8')
 class DreamTreeTop:
     """查看梦想树排名"""
 
-    def GET(self, count=10, index=0):
+    def GET(self, count=20, index=0):
         web.header('Content-Type', 'text/html; charset=utf-8')
         index=int(index)
         count=int(count)
         return self.main(count, index)
 
-    def main(self, count=10, index=0):
+    def main(self, count=20, index=0):
         # 配置数据库参数
         host='dw-mysql-remote'
         db='douwan3android'

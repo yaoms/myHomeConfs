@@ -12,12 +12,20 @@ urls = (
 		'/send', "MsgSender",
 		'/send/', "MsgSender",
 
-		'/cubetop', "DreamCubeTop",
-		'/cubetop/', "DreamCubeTop",
-		'/cubetop/count(\d+)/index(\d+)', "DreamCubeTop",
-		'/cubetop/count(\d+)/index(\d+)/', "DreamCubeTop",
-		'/cubetop/count(\d+)', "DreamCubeTop",
-		'/cubetop/count(\d+)/', "DreamCubeTop",
+		'/top', "DreamCubeTop",
+		'/top/', "DreamCubeTop",
+		'/top/(cube)', "DreamCubeTop",
+		'/top/(cube)/', "DreamCubeTop",
+		'/top/(cube)/count(\d+)/index(\d+)', "DreamCubeTop",
+		'/top/(cube)/count(\d+)/index(\d+)/', "DreamCubeTop",
+		'/top/(cube)/count(\d+)', "DreamCubeTop",
+		'/top/(cube)/count(\d+)/', "DreamCubeTop",
+		'/top/(dream)', "DreamCubeTop",
+		'/top/(dream)/', "DreamCubeTop",
+		'/top/(dream)/count(\d+)/index(\d+)', "DreamCubeTop",
+		'/top/(dream)/count(\d+)/index(\d+)/', "DreamCubeTop",
+		'/top/(dream)/count(\d+)', "DreamCubeTop",
+		'/top/(dream)/count(\d+)/', "DreamCubeTop",
 
 		'/treetop', "DreamTreeTop",
 		'/treetop/', "DreamTreeTop",
@@ -34,8 +42,15 @@ urls = (
 		'/robots/count(\d+)/index(\d+)/', "Robots",
 
 		'/', "index",
-        '/(.+(?:jpg|jpeg|png|gif|css|js|ico))', 'static'
+        '/(.+(?:jpg|jpeg|png|gif|css|js|ico))', 'static',
+
+        '/manager/html', 'Honeynet'
 	)
+
+class Honeynet:
+    def GET(self):
+        print web.ctx.env.get('HTTP_USER_AGENT')
+        return "ok\r\n"
 
 class static:
     def GET(self, path):

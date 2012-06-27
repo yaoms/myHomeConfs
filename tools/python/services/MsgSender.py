@@ -19,8 +19,8 @@ class MsgSender:
 
     def sendMessage(self, subject, content):
         mailSendFrom = 'monitor-py'
-        mailSendTo = 'receiver@domain.com' #['sss@gmail.com', 'mailreader@mail.com']
+        mailSendTo = 'yms541@gmail.com' #['sss@gmail.com', 'mailreader@mail.com']
 
-        # web.sendmail(mailSendFrom, mailSendTo, subject, content)
+        web.sendmail(mailSendFrom, mailSendTo, subject, content)
         # send sms ...
         return "ok"
