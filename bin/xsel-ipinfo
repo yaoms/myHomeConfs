@@ -1,11 +1,7 @@
 #!/bin/sh
 # get ip address info from ip138.com selected words with google-translate
 # and show it with libnotify
-cd $(dirname $0)
-DISPLAY=:0.0 notify-send -i /usr/share/pixmaps/chmsee-icon.png \
-    -u normal -t 3000 Waiting ...
-HOST=`/usr/bin/xsel -o`
-TEXT=`./ipinfo.py """$HOST"""`
-DISPLAY=:0.0 notify-send -i /usr/share/pixmaps/chmsee-icon.png \
-	 -u normal -t 8000  来自ip138： """$HOST:\n$TEXT"""
-#echo $TEXT
+icon=/usr/share/pixmaps/faces/energy-arc.jpg
+HOST=$(DISPLAY=:0.0 /usr/bin/xsel -o)
+TEXT=$(python $HOME/myHomeConfs/tools/python/services/ipinfo.py """$HOST""")
+DISPLAY=:0.0 notify-send -i $icon -u low "来自ip138：" """$HOST:\n$TEXT"""
