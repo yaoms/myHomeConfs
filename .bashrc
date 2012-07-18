@@ -37,3 +37,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 if [ -d "$HOME/myHomeConfs/bin" ] ; then
     export PATH="$HOME/myHomeConfs/bin:$PATH"
 fi
+
+if [ -d "$HOME/work/devel/android-sdk-linux_86/platform-tools" ] ; then
+    export PATH="$HOME/work/devel/android-sdk-linux_86/platform-tools:$PATH"
+fi
