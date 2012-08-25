@@ -38,8 +38,8 @@ echo 'UNLOCK TABLES' | $MYSQL_CLI
 echo send to slaves
 for h in $SLAVES
 do
-    echo scp to $h
-    scp master.dump.sql.bz2 master.slave.sync.info master.slave.start.bash $h:
-    echo apply to $h
-    ssh $h "bash master.slave.start.bash"
+        echo scp to $h
+        scp master.dump.sql.bz2 master.slave.sync.info master.slave.start.bash $h:
+        echo apply to $h
+        ssh $h "bash master.slave.start.bash"
 done
