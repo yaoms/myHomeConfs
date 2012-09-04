@@ -1,0 +1,30 @@
+
+
+#
+# grant replication slave on *.* to 'slave10'@'192.168.48.%' identified by 'slave10';
+#
+
+
+server-id       = 10
+
+
+master-host     =   192.168.1.33
+#
+# The username the slave will use for authentication when connecting
+# to the master - required
+master-user     =   slave10
+#
+# The password the slave will authenticate with when connecting to
+# the master - required
+master-password =   slave10
+#
+# The port the master is listening on.
+# optional - defaults to 3306
+master-port     =  3306
+
+replicate-do-db=douwan3
+replicate-do-db=douwan3android
+replicate-ignore-db=information_schema
+replicate-ignore-db=iapppay_kkfun
+replicate-ignore-db=mysql
+replicate-ignore-db=test

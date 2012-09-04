@@ -5,3 +5,4 @@ icon=/usr/share/pixmaps/faces/energy-arc.jpg
 WORDS=$(DISPLAY=:0.0 /usr/bin/xsel -o)
 TEXT=$(python $HOME/myHomeConfs/tools/python/services/translate.py """$WORDS""")
 DISPLAY=:0.0 notify-send -i $icon -u low "来自有道翻译：" """$WORDS:\n$TEXT"""
+canberra-gtk-play -f /usr/share/sounds/gnome/default/alerts/drip.ogg &

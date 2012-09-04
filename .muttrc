@@ -1,0 +1,5 @@
+set editor = "vim"
+set smtp_url = "smtp://account@smtp.gmail.com:587/"
+set smtp_pass = "PASSWORD"
+set from = "account@gmail.com"
+set realname = "real name"
