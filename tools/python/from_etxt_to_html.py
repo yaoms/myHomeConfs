@@ -1,6 +1,7 @@
 # coding: utf-8
 # 电子书整理程序
 # author: yaoms
+# date: 2012年 09月 19日 星期三 11:23:10 CST
 from utils.confirm_ask import confirm_ask
 from etxt.Book import Book
 
