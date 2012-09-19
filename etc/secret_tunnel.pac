@@ -19,7 +19,7 @@ function FindProxyForURL(url, host) {
   if(shExpMatch(url, '*.wikipedia.org/*')) return SOCKS_PROXY; // 维基百科
   if(shExpMatch(url, '*.appspot.com/*') return SOCKS_PROXY; // Google app engine
 
-  if(shExpMatch(url, '*ip138.com*')) return SOCKS_PROXY;
+  if(/ip138\.com/i.test(url)) return SOCKS_PROXY;
 
   //if(/101\.47\.94\.107/.test(url)) return HTTP_PROXY;
 
