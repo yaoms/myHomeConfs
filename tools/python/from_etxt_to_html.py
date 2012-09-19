@@ -1,5 +1,6 @@
 # coding: utf-8
 # 电子书整理程序
+# author: yaoms
 from utils.confirm_ask import confirm_ask
 from etxt.Book import Book
 
