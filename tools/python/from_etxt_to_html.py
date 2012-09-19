@@ -1,4 +1,5 @@
 # coding: utf-8
+# 电子书整理程序
 from utils.confirm_ask import confirm_ask
 from etxt.Book import Book
 
