@@ -1,10 +1,11 @@
 /*
- * version 0.5
- * 2012年 02月 23日 星期四 14:34:06 CST
+ * version 0.8
+ * 2012年 09月 19日 星期三 14:03:00 CST
  * file:///home/yaoms/myHomeConfs/etc/secret_tunnel.pac
  */
 function FindProxyForURL(url, host) {
   var PROXY = "SOCKS5 127.0.0.1:7070"; // autossh 开辟的秘密通道
+  var HTTP_PROXY = "PROXY 127.0.0.1:8088"; // autossh 开辟的秘密通道
   var DEFAULT = "DIRECT";
 
   if(/google\.com/i.test(url)) return PROXY; // Google 谷歌
