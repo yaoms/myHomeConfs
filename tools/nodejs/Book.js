@@ -1,71 +1,147 @@
+'use strict';
+
+require('utils');
 var fs = require('fs');
+var path = require('path');
+
 
 function Chapter() {
-        this.name = "";
-        this.paragraphs = new Array();
+    this.name = "";
+    this.paragraphs = [];
+}
+
+Chapter.prototype.dumpSafe = function(dirname, pre, index, nxt, chapters) {
+    var self = this;
+    var this_chapter_file = fs.createWriteStream(dirname + '/' + index + '.html');
+    this_chapter_file.write('<html>\n');
+    this_chapter_file.write('<head>\n');
+    this_chapter_file.write('<title>' + self.name + '</title>\n');
+    this_chapter_file.write('<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />\n');
+    this_chapter_file.write('<style>\n');
+    this_chapter_file.write('p {text-indent:2em;}\n');
+    this_chapter_file.write('</style>\n');
+    this_chapter_file.write('</head>\n');
+    this_chapter_file.write('<body>\n');
+    this_chapter_file.write('<h1>' + self.name + '</h1>');
+
+    for (var i in self.paragraphs) {
+        var p = self.paragraphs[i];
+        this_chapter_file.write('<p>' + p + '</p>\n');
+    }
+
+    this_chapter_file.write('<hr/>\n');
+    this_chapter_file.write('<p>');
+    if (pre >= 1) {
+        this_chapter_file.write('<a href="' + pre + '.html" title="prev">上一章</a>\n');
+    }
+
+    this_chapter_file.write('<a href="index.html" title="home">返回目录</a>\n');
+    if (nxt <= chapters) {
+        this_chapter_file.write('<a href="' + nxt + '.html" title="next">下一章</a>\n');
+    }
+    this_chapter_file.write('</p>\n');
+    this_chapter_file.end('</body>\n</html>\n');
 }
 
 function Book() {
-        this.name = "";
-        this.author = "";
-        this.chapters = new Array();
+    this.name = "";
+    this.author = "";
+    this.prog = "etxt-maker";
+    this.chapters = [];
+    this.callbacks = {};
 }
 
-if (typeof(String.prototype.startsWith) === 'undefined') {
-        String.prototype.startsWith = function (str) {
-                return String(this).indexOf(str) == 0;
-        };
+Book.prototype.on = function(eventName, callback) {
+    this.callbacks[eventName] = callback;
 }
 
-if (typeof(String.prototype.trim) === 'undefined') {
-        String.prototype.trim = function () {
-                return String(this).replace(/^\s+|\s+$/g, '');
-        };
-}
+Book.prototype.load = function(data) {
 
-Book.prototype.load = function(filename) {
-        console.info("加载书籍内容: " + filename);
-        var etxt = String(fs.readFileSync(filename));
-        var lines = etxt.split(/\n/);
-        for (var index in lines) {
-                var line = lines[index];
-                if (line.startsWith('书名:')) {
-                        this.name = line.substring('书名:'.length).trim();
-                } else if (line.startsWith('作者:')) {
-                        this.author = line.substring('作者:'.length).trim();
-                } else if (/ 字数:\d+/.test(line)) {
-                        if (typeof(currentChapter) != 'undefined') {
-                                this.chapters.push(currentChapter);
-                        }
-                        currentChapter = new Chapter();
-                        currentChapter.name = line.replace(/ 字数:\d+/, '');
-                } else if (line.startsWith('  ') && typeof(currentChapter) != 'undefined') {
-                        currentChapter.paragraphs.push(line.trim());
-                }
+    var book = this;
+
+    var lines = data.split(/\r?\n/);
+    var currentChapter = false;
+    for (var i=0; i<lines.length; i++) {
+        var line = lines[i].trim();
+        if (line.startsWith('<')) {
+            book.name = line.substring(1);
+        } else if (line.startsWith('@')) {
+            book.author = line.substring(1);
+        } else if (line.startsWith('#')) {
+            if (currentChapter != false) {
+                book.chapters.push(currentChapter);
+            }
+            currentChapter = new Chapter();
+            currentChapter.name = line.substring(1);
+        } else if (line.startsWith('!')) {
+            ;
+        } else if (line.length) {
+            if (currentChapter != false) {
+                currentChapter.paragraphs.push(line);
+            }
         }
-        if (typeof(currentChapter) != 'undefined') {
-                this.chapters.push(currentChapter);
-        }
+    }
+    if (currentChapter) {
+        book.chapters.push(currentChapter);
+    }
+
+    this.callbacks['load'](this);
 }
 
 Book.prototype.info = function() {
-        console.info("书籍信息");
-        console.info(" - 书名: " + this.name);
-        console.info(" - 作者: " + this.author);
-        console.info("");
-        console.info("=============================");
-        for (var index in this.chapters) {
-                var chapter  = this.chapters[index];
-                console.info(" = " + chapter.name);
-        }
-        console.info("=============================");
+    console.info("书籍信息");
+    console.info(" - 书名: " + this.name);
+    console.info(" - 作者: " + this.author);
+    console.info("");
+    console.info("=============================");
+    for (var index in this.chapters) {
+        var chapter  = this.chapters[index];
+        console.info(" = " + chapter.name);
+    }
+    console.info("=============================");
 }
 
-Book.prototype.dumpTo = function(dirname) {
-        console.info("导出到指定文件夹: " + dirname);
+Book.prototype.dumpSafe = function(dirname) {
+    var self = this;
+    path.exists(dirname, function(exists){if(!exists) {fs.mkdir(dirname, function(){self.dump(dirname)})}else self.dump(dirname);});
+}
+
+Book.prototype.dump = function(dirname) {
+    var self = this;
+    var indexfile = fs.createWriteStream(dirname + '/index.html');
+
+    indexfile.write('<html>\n');
+    indexfile.write('<head>\n');
+    indexfile.write('<title>' + self.name + '</title>\n');
+    indexfile.write('<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />\n');
+    indexfile.write('</head>\n');
+    indexfile.write('<body>\n');
+    indexfile.write('<h1>《' + self.name + '》</h1>');
+    indexfile.write('<p>作者：' + self.author + '</p>');
+    indexfile.write('<ol>\n');
+
+    var index = 1;
+    var pre = 0;
+    var nxt = index + 1;
+
+    for (var i in self.chapters) {
+        var chapter = self.chapters[i];
+        indexfile.write('  <li><a href="' + index + '.html">' + chapter.name + '</a></li>\n');
+        chapter.dumpSafe(dirname, pre, index, nxt, self.chapters.length);
+        index += 1;
+        pre = index - 1;
+        nxt = index + 1;
+    }
+
+    indexfile.write('</ol>\n');
+    indexfile.write('<p>Generated by ' + self.prog + '. ' + new Date() + '</p>\n');
+    indexfile.write('</body>\n');
+    indexfile.end('</html>\n');
 }
 
 var book = new Book();
-book.load("/home/yaoms/相公多多追着跑.etxt");
-book.info();
-book.dumpTo("/tmp/output");
+book.on('load',
+        function(self){self.info();self.dumpSafe('/tmp/output');});
+fs.readFile('/home/yaoms/相公多多追着跑.etxt',
+        'utf-8',
+        function(err, data){if (err) throw err;book.load(data);});
